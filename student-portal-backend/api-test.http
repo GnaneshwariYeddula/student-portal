@@ -1,0 +1,123 @@
+### REGISTER
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "123456",
+  "role": "student"
+}
+
+###
+
+### LOGIN (copy token from response)
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "123456"
+}
+
+###
+
+### PROFILE (GET)
+GET http://localhost:5000/api/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTgxOGFjYzczYTMzODk3OTcyYzY1NyIsImlhdCI6MTc1NzA1NzUwMSwiZXhwIjoxNzU3NjYyMzAxfQ.DECBb0sAXS96_jbnv3wYX5yc0TD8hAjsimZ1pzL3dng
+
+###
+
+### PROFILE (UPDATE)
+PUT http://localhost:5000/api/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTgxOGFjYzczYTMzODk3OTcyYzY1NyIsImlhdCI6MTc1NzA1NzUwMSwiZXhwIjoxNzU3NjYyMzAxfQ.DECBb0sAXS96_jbnv3wYX5yc0TD8hAjsimZ1pzL3dng
+
+{
+  "rollNumber": "22BCE1001",
+  "branch": "CSE",
+  "semester": "5",
+  "phone": "9876543210",
+  "address": "Hyderabad",
+  "dob": "2003-05-12"
+}
+
+###
+
+### PROFILE PHOTO UPLOAD
+POST http://localhost:5000/api/upload/profile-photo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTgxOGFjYzczYTMzODk3OTcyYzY1NyIsImlhdCI6MTc1NzA1NzUwMSwiZXhwIjoxNzU3NjYyMzAxfQ.DECBb0sAXS96_jbnv3wYX5yc0TD8hAjsimZ1pzL3dng
+Content-Type: multipart/form-data
+
+--boundary
+Content-Disposition: form-data; name="photo"; filename="profile.jpg"
+Content-Type: image/jpeg
+
+< ./profile.jpg
+--boundary--
+
+###
+
+### MARKS (ADD SUBJECT)
+POST http://localhost:5000/api/marks
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTgxOGFjYzczYTMzODk3OTcyYzY1NyIsImlhdCI6MTc1NzA1NzUwMSwiZXhwIjoxNzU3NjYyMzAxfQ.DECBb0sAXS96_jbnv3wYX5yc0TD8hAjsimZ1pzL3dng
+
+{
+  "semester": 5,
+  "subject": "Mathematics",
+  "marks": 88,
+  "grade": "A"
+}
+
+###
+
+### MARKS (GET)
+GET http://localhost:5000/api/marks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTgxOGFjYzczYTMzODk3OTcyYzY1NyIsImlhdCI6MTc1NzA1NzUwMSwiZXhwIjoxNzU3NjYyMzAxfQ.DECBb0sAXS96_jbnv3wYX5yc0TD8hAjsimZ1pzL3dng
+
+###
+
+### MARKS (DELETE SUBJECT)
+DELETE http://localhost:5000/api/marks/subject/64f123abcde
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTgxOGFjYzczYTMzODk3OTcyYzY1NyIsImlhdCI6MTc1NzA1NzUwMSwiZXhwIjoxNzU3NjYyMzAxfQ.DECBb0sAXS96_jbnv3wYX5yc0TD8hAjsimZ1pzL3dng
+
+###
+
+### CERTIFICATES (ADD WITHOUT FILE)
+POST http://localhost:5000/api/certificates
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTgxOGFjYzczYTMzODk3OTcyYzY1NyIsImlhdCI6MTc1NzA1NzUwMSwiZXhwIjoxNzU3NjYyMzAxfQ.DECBb0sAXS96_jbnv3wYX5yc0TD8hAjsimZ1pzL3dng
+
+{
+  "category": "Personal", 
+  "title": "AWS Cloud Practitioner",
+  "issuedBy": "Amazon",
+  "date": "2025-08-01"
+}
+
+###
+
+### CERTIFICATES (ADD WITH FILE)
+POST http://localhost:5000/api/certificates/upload
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTgxOGFjYzczYTMzODk3OTcyYzY1NyIsImlhdCI6MTc1NzA1NzUwMSwiZXhwIjoxNzU3NjYyMzAxfQ.DECBb0sAXS96_jbnv3wYX5yc0TD8hAjsimZ1pzL3dng
+Content-Type: multipart/form-data
+
+--boundary
+Content-Disposition: form-data; name="certificate"; filename="aws.pdf"
+Content-Type: application/pdf
+
+< ./aws.pdf
+--boundary--
+
+###
+
+### CERTIFICATES (GET)
+GET http://localhost:5000/api/certificates
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTgxOGFjYzczYTMzODk3OTcyYzY1NyIsImlhdCI6MTc1NzA1NzUwMSwiZXhwIjoxNzU3NjYyMzAxfQ.DECBb0sAXS96_jbnv3wYX5yc0TD8hAjsimZ1pzL3dng
+
+###
+
+### CERTIFICATES (DELETE)
+DELETE http://localhost:5000/api/certificates/64f123abcde
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTgxOGFjYzczYTMzODk3OTcyYzY1NyIsImlhdCI6MTc1NzA1NzUwMSwiZXhwIjoxNzU3NjYyMzAxfQ.DECBb0sAXS96_jbnv3wYX5yc0TD8hAjsimZ1pzL3dng
